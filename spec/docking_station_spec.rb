@@ -25,23 +25,21 @@ describe DockingStation do
 
   it 'can dock a bike' do
     docking_station = DockingStation.new
-    bike = Bike.new
-    docking_station.dock_bike(bike)
-    expect(docking_station.bikes_in_dock[0]).to eq(bike)
+    dummy = double(:bike)
+    docking_station.dock_bike dummy
+    expect(docking_station.bikes_in_dock[0]).to eq(dummy)
   end
 
   it 'allows user to flag a broken bike' do
     ds = DockingStation.new
-    bike = Bike.new
-    ds.dock_bike(bike)
+    ds.dock_bike double(:bike)
     ds.report_broken_bike
     expect(ds.bikes_in_dock[-1].working).to eq false
   end
 
   it 'will not release broken bike' do
     ds = DockingStation.new
-    bike = Bike.new
-    ds.dock_bike(bike)
+    ds.dock_bike double(:bike)
     ds.report_broken_bike
     expect { ds.release_bike }.to raise_error('This bike is not working')
   end
@@ -53,8 +51,8 @@ describe DockingStation do
 
   it 'raises error if you ask to dock a bike when the dock is full' do
     ds = DockingStation.new
-    20.times{ ds.dock_bike(Bike.new) }
-    expect { ds.dock_bike(Bike.new) }.to raise_error('Dock is full')
+    20.times{ ds.dock_bike(double(:bike)) }
+    expect { ds.dock_bike(double(:bike)) }.to raise_error('Dock is full')
   end
 
 end
