@@ -1,6 +1,6 @@
-class Bike
-  bike = Bike.new
-  def working?
-  end
-  bike.working?
-end
+# class Bike
+#   def working?
+#
+#   end
+#   # bike.working?
+# end

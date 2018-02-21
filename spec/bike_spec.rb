@@ -1,7 +1,9 @@
-require_relative "../lib/bike.rb"
+# require_relative "../lib/bike.rb"
 
-describe Bike do
-  it "responds to working?" do
-    expect(subject).to respond_to :working?
-  end
-end
+# describe Bike do
+#
+#   it "responds to working?" do
+#     bike = Bike.new
+#     expect(bike).to respond_to :working?
+#   end
+# end
