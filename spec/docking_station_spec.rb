@@ -10,7 +10,7 @@ describe DockingStation do
 
   it 'expects bike to be working?' do
     bike = Bike.new
-    expect(bike).to respond_to :working?
+    expect(bike).to respond_to :working
   end
 
   it 'has a bike dock' do
@@ -18,7 +18,7 @@ describe DockingStation do
     expect(docking_station).to respond_to :bikes_in_dock
   end
 
-  it 'has dock' do
+  it 'has dock bike command' do
     docking_station = DockingStation.new
     expect(docking_station).to respond_to :dock_bike
   end
@@ -30,6 +30,22 @@ describe DockingStation do
     expect(docking_station.bikes_in_dock[0]).to eq(bike)
   end
 
+  it 'allows user to flag a broken bike' do
+    ds = DockingStation.new
+    bike = Bike.new
+    ds.dock_bike(bike)
+    ds.report_broken_bike
+    expect(ds.bikes_in_dock[-1].working).to eq false
+  end
+
+  it 'will not release broken bike' do
+    ds = DockingStation.new
+    bike = Bike.new
+    ds.dock_bike(bike)
+    ds.report_broken_bike
+    expect { ds.release_bike }.to raise_error('This bike is not working')
+  end
+
   it 'raises error if you ask for a bike when there are no bikes' do
     ds = DockingStation.new
     expect { ds.release_bike }.to raise_error('There are no bikes') # expect whatever is done in the curly brackets to raise error
@@ -37,26 +53,16 @@ describe DockingStation do
 
   it 'raises error if you ask to dock a bike when the dock is full' do
     ds = DockingStation.new
-    ds.capacity.times{ ds.dock_bike(Bike.new) }
+    20.times{ ds.dock_bike(Bike.new) }
     expect { ds.dock_bike(Bike.new) }.to raise_error('Dock is full')
-  end
-
-  it 'lets user set capacity' do
-    ds = DockingStation.new(40)
-    expect(ds.capacity).to eq(40)
-  end
-
-  it 'has default capacity of 20' do
-    ds = DockingStation.new
-    expect(ds.capacity).to eq(20)
   end
 
 end
 
 describe Bike do
 
-  it "responds to working?" do
+  it 'responds to working?' do
     bike = Bike.new
-    expect(bike).to respond_to :working?
+    expect(bike).to respond_to :working
   end
 end

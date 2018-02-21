@@ -13,7 +13,15 @@ class DockingStation
 
   def release_bike
     fail 'There are no bikes' if empty? # guard statement - stops anything else running
-    bike = Bike.new
+    fail 'This bike is not working' unless broken?
+    bike = @bikes_in_dock.pop
+
+  end
+
+  def report_broken_bike
+    # puts "Is bike broken? enter yes or no"
+    # user_input = gets.chomp
+    @bikes_in_dock[-1].working = false # if user_input == "yes"
   end
 
   def dock_bike(bike)
@@ -29,12 +37,17 @@ class DockingStation
     def empty?
       @bikes_in_dock.count.zero?
     end
+
+    def broken?
+      @bikes_in_dock[-1].working
+    end
 end
 
 
 class Bike
-  def working?
+  attr_accessor :working
 
+  def initialize
+    @working = true
   end
-  # bike.working?
 end
