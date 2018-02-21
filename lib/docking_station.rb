@@ -6,6 +6,7 @@ class DockingStation
   end
 
   def release_bike
+    fail 'There are no bikes' if @bike_dock.count.zero? # guard statement - stops anything else running
     bike = Bike.new
   end
 

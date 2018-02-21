@@ -29,6 +29,12 @@ describe DockingStation do
     docking_station.dock_bike(bike)
     expect(docking_station.bike_dock[0]).to eq(bike)
   end
+
+  it 'raises error if you ask for a bike when there are no bikes' do
+    ds = DockingStation.new
+    expect { ds.release_bike }.to raise_error('There are no bikes') # expect whatever is done in the curly brackets to raise error
+  end
+
 end
 
 describe Bike do
