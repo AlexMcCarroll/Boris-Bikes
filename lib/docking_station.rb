@@ -1,18 +1,18 @@
 class DockingStation
-  attr_reader :bike_dock
+  attr_reader :bikes_in_dock
 
   def initialize
-    @bike_dock = []
+    @bikes_in_dock = []
   end
 
   def release_bike
-    fail 'There are no bikes' if @bike_dock.count.zero? # guard statement - stops anything else running
+    fail 'There are no bikes' if @bikes_in_dock.count.zero? # guard statement - stops anything else running
     bike = Bike.new
   end
 
   def dock_bike(bike)
-    fail 'Dock is full' if @bike_dock.count == 1 # guard statement
-    @bike_dock << bike
+    fail 'Dock is full' if @bikes_in_dock.count == 20 # guard statement
+    @bikes_in_dock << bike
   end
 end
 

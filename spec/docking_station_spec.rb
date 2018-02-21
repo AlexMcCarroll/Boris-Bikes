@@ -15,7 +15,7 @@ describe DockingStation do
 
   it 'has a bike dock' do
     docking_station = DockingStation.new
-    expect(docking_station).to respond_to :bike_dock
+    expect(docking_station).to respond_to :bikes_in_dock
   end
 
   it 'has dock' do
@@ -27,7 +27,7 @@ describe DockingStation do
     docking_station = DockingStation.new
     bike = Bike.new
     docking_station.dock_bike(bike)
-    expect(docking_station.bike_dock[0]).to eq(bike)
+    expect(docking_station.bikes_in_dock[0]).to eq(bike)
   end
 
   it 'raises error if you ask for a bike when there are no bikes' do
@@ -37,10 +37,8 @@ describe DockingStation do
 
   it 'raises error if you ask to dock a bike when the dock is full' do
     ds = DockingStation.new
-    bike1 = Bike.new
-    ds.dock_bike(bike1)
-    bike2 = Bike.new
-    expect { ds.dock_bike(bike2) }.to raise_error('Dock is full')
+    20.times{ ds.dock_bike(Bike.new) }
+    expect { ds.dock_bike(Bike.new) }.to raise_error('Dock is full')
   end
 
 end
