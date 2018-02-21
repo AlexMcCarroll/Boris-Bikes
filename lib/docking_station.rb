@@ -6,15 +6,25 @@ class DockingStation
   end
 
   def release_bike
-    fail 'There are no bikes' if @bikes_in_dock.count.zero? # guard statement - stops anything else running
+    fail 'There are no bikes' if empty? # guard statement - stops anything else running
     bike = Bike.new
   end
 
   def dock_bike(bike)
-    fail 'Dock is full' if @bikes_in_dock.count == 20 # guard statement
+    fail 'Dock is full' if full? # guard statement
     @bikes_in_dock << bike
   end
+
+  private
+    def full?
+      @bikes_in_dock.count == 20
+    end
+
+    def empty?
+      @bikes_in_dock.count.zero?
+    end
 end
+
 
 class Bike
   def working?
