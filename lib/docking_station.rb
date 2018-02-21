@@ -11,6 +11,7 @@ class DockingStation
   end
 
   def dock_bike(bike)
+    fail 'Dock is full' if @bike_dock.count == 1 # guard statement
     @bike_dock << bike
   end
 end
