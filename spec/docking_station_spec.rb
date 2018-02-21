@@ -32,14 +32,14 @@ describe DockingStation do
 
   it 'allows user to flag a broken bike' do
     ds = DockingStation.new
-    ds.dock_bike double(:bike)
+    ds.dock_bike double(:is_broken => nil, :is_working? => false)
     ds.report_broken_bike
-    expect(ds.bikes_in_dock[-1].working).to eq false
+    expect(ds.bikes_in_dock[-1].is_working?).to eq false
   end
 
   it 'will not release broken bike' do
     ds = DockingStation.new
-    ds.dock_bike double(:bike)
+    ds.dock_bike double(:is_broken => nil, :is_working? => false)
     ds.report_broken_bike
     expect { ds.release_bike }.to raise_error('This bike is not working')
   end

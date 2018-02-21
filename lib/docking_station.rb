@@ -21,7 +21,7 @@ class DockingStation
   def report_broken_bike
     # puts "Is bike broken? enter yes or no"
     # user_input = gets.chomp
-    @bikes_in_dock[-1].working = false # if user_input == "yes"
+    @bikes_in_dock[-1].is_broken # if user_input == "yes"
   end
 
   def dock_bike(bike)
@@ -39,7 +39,7 @@ class DockingStation
     end
 
     def broken?
-      @bikes_in_dock[-1].working
+      @bikes_in_dock[-1].is_working?
     end
 end
 
@@ -49,5 +49,13 @@ class Bike
 
   def initialize
     @working = true
+  end
+
+  def is_broken
+    @working = false
+  end
+
+  def is_working?
+    @working
   end
 end
